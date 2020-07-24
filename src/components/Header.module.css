@@ -1,0 +1,10 @@
+.logo{
+    width: 50px;
+    padding-left: 20px;
+    padding-top: 5px; 
+  }
+  
+  .header {
+    grid-area: header;
+    background-color: blueviolet;
+  }
