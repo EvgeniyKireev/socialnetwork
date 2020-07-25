@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Content from './components/Content/Content';
+import Mypage from './components/Mypage/Mypage';
 
 
 class App extends React.Component {
@@ -11,7 +11,9 @@ class App extends React.Component {
       <div className='wrapper'>
         <Header />
         <Nav />
-        <Content />
+        <div className='mcontent'>
+        <Mypage />
+        </div>
         </div>
     );
   }

@@ -1,14 +1,14 @@
 import React from 'react';
-import s from './Content.module.css';
+import s from './Mypage.module.css';
 import Profile from './Profile/Profile';
 import Myposts from './Myposts/Myposts';
 
-const Content = () => {
+const Mypage = () => {
     return(
-        <div className={s.mcontent}>
+        <div>
         <Profile />
         <Myposts />
         </div>
     );
 }
-export default Content;
+export default Mypage;

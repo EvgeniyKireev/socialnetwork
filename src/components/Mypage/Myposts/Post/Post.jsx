@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = () => {
+const Post = (props) => {
     return(
         <div className={s.post}>
             <img className={s.avatar}src="https://cdn.worldvectorlogo.com/logos/tiktok-logo-2--1.svg" alt="avatar"/>
-            <div>комментарий</div>
+            <div>{props.text}</div>
             <button>Like</button>
         </div>
     );

@@ -9,8 +9,8 @@ const Myposts = () => {
             <input type="text"/>
             <button>Опубликовать</button>
         </form>
-        <Post />
-        <Post />
+        <Post text='Привет, отличный сайт'/>
+        <Post text='Круто, добавь меня в друзья!'/>
         </div>
     );
 }
