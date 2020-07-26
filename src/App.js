@@ -5,6 +5,8 @@ import Nav from "./components/Nav/Nav";
 import Mypage from "./components/Mypage/Mypage";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
+import News from "./components/News/News";
+import Settings from "./components/Settings/Settings";
 
 class App extends React.Component {
   render() {
@@ -16,6 +18,8 @@ class App extends React.Component {
           <div className="mcontent">
             <Route path="/profile" component={Mypage} />
             <Route path="/dialogs" component={Dialogs} />
+            <Route path='/news' component={News} />
+            <Route path='/settings' component={Settings} />
           </div>
         </div>
       </BrowserRouter>

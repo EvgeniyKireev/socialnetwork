@@ -15,7 +15,7 @@ const Profile = () => {
         <div className={s.name}>Evgeny Kireev</div>
       </div>
       <div className={s.description}>
-        <ul>
+        <ul> 
           <li>19 лет</li>
           <li>Россия</li>
           <li>Москва</li>

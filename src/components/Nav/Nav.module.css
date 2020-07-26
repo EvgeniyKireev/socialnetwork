@@ -8,3 +8,6 @@
     text-decoration: none;
     color: black;
   }
+  .item a.active {
+    color: gold;
+  }
