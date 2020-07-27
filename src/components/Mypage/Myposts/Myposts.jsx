@@ -6,7 +6,7 @@ const Myposts = () => {
     return(
         <div>
         <form>
-            <input type="text"/>
+            <textarea></textarea>
             <button>Опубликовать</button>
         </form>
         <Post text='Привет, отличный сайт'/>

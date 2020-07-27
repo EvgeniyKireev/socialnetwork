@@ -9,6 +9,9 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <BrowserRouter>
@@ -17,7 +20,7 @@ class App extends React.Component {
           <Nav />
           <div className="mcontent">
             <Route path="/profile" component={Mypage} />
-            <Route path="/dialogs" component={Dialogs} />
+            <Route path="/dialogs" render={() => <Dialogs componentMessage={this.props.componentMessage} componentUsers={this.props.componentUsers} />} />
             <Route path='/news' component={News} />
             <Route path='/settings' component={Settings} />
           </div>
