@@ -8,6 +8,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,7 @@ class App extends React.Component {
           <Header />
           <Nav />
           <div className="mcontent">
-            <Route path="/profile" component={Mypage} />
+            <Route path="/profile" render={() => <Mypage componentPosts={this.props.componentPosts}/>} />
             <Route path="/dialogs" render={() => <Dialogs componentMessage={this.props.componentMessage} componentUsers={this.props.componentUsers} />} />
             <Route path='/news' component={News} />
             <Route path='/settings' component={Settings} />

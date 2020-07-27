@@ -8,6 +8,7 @@ const Message = (props) => {
     <div>
       <div>{props.message}</div>
     </div>
+    
   );
 };
 
