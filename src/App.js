@@ -8,25 +8,34 @@ import { BrowserRouter, Route } from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <BrowserRouter>
         <div className="wrapper">
           <Header />
           <Nav />
           <div className="mcontent">
-            <Route path="/profile" render={() => <Mypage componentPosts={this.props.componentPosts}/>} />
-            <Route path="/dialogs" render={() => <Dialogs componentMessage={this.props.componentMessage} componentUsers={this.props.componentUsers} />} />
-            <Route path='/news' component={News} />
-            <Route path='/settings' component={Settings} />
+            <Route
+              path="/profile"
+              render={() => (
+                <Mypage
+                  state={this.props.state.profilePage}
+                  addPost={this.props.addPost}
+                  updateNewTextPost={this.props.updateNewTextPost}
+                />
+              )}
+            />
+            <Route
+              path="/dialogs"
+              render={() => <Dialogs state={this.props.state.dialogsPage} />}
+            />
+            <Route path="/news" component={News} />
+            <Route path="/settings" component={Settings} />
           </div>
         </div>
-      </BrowserRouter>
     );
   }
 }
