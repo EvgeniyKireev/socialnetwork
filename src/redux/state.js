@@ -1,4 +1,6 @@
-import { reRenderTree } from "../render";
+let reRenderTree = () => {
+  console.log('WHATSUP');
+}
 
 
 let state = {
@@ -34,6 +36,10 @@ export let addPost = () => {
 export let updateNewTextPost = (NewPostText) => {
   state.profilePage.newTextPost = NewPostText;
   reRenderTree(state);
+}
+
+export const subscribe = (renderFunc) => {
+  reRenderTree = renderFunc;
 }
 
 
