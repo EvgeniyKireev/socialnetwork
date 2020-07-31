@@ -14,28 +14,27 @@ class App extends React.Component {
   }
   render() {
     return (
-        <div className="wrapper">
-          <Header />
-          <Nav />
-          <div className="mcontent">
-            <Route
-              path="/profile"
-              render={() => (
-                <Mypage
-                  state={this.props.state.profilePage}
-                  addPost={this.props.addPost}
-                  updateNewTextPost={this.props.updateNewTextPost}
-                />
-              )}
-            />
-            <Route
-              path="/dialogs"
-              render={() => <Dialogs state={this.props.state.dialogsPage} />}
-            />
-            <Route path="/news" component={News} />
-            <Route path="/settings" component={Settings} />
-          </div>
+      <div className="wrapper">
+        <Header />
+        <Nav />
+        <div className="mcontent">
+          <Route
+            path="/profile"
+            render={() => (
+              <Mypage
+                state={this.props.state.profilePage}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path="/dialogs"
+            render={() => <Dialogs state={this.props.state.dialogsPage} dispatch={this.props.dispatch} />}
+          />
+          <Route path="/news" component={News} />
+          <Route path="/settings" component={Settings} />
         </div>
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ const Mypage = (props) => {
   return (
     <div>
       <Profile />
-      <Myposts state={props.state} addPost={props.addPost} updateNewTextPost={props.updateNewTextPost}/>
+      <Myposts state={props.state} dispatch={props.dispatch} />
     </div>
   );
 };

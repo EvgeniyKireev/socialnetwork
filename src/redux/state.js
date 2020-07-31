@@ -1,3 +1,11 @@
+import { profileReducer } from "./profile-reducer";
+import { dialogsReducer } from "./dialogs-reducer";
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_TEXT_POST = 'UPDATE-NEW-TEXT-POST';
+const UPDATE_NEW_TEXT_MES = 'UPDATE_NEW_TEXT_MES';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
 let store = {
   state: {
     profilePage: {
@@ -20,23 +28,26 @@ let store = {
         { message: "Go walk on the street" },
         { message: "ya poshel spat" },
       ],
+      newMessageText : '123',
     },
-  },
-  addPost() {
-    let post = { id: 3, post: this.state.profilePage.newTextPost };
-    this.state.profilePage.posts.push(post);
-    this.reRenderTree(this.state);
-  },
-  updateNewTextPost(NewPostText) {
-    this.state.profilePage.newTextPost = NewPostText;
-    this.reRenderTree(this.state);
   },
   subscribe(renderFunc) {
     this.reRenderTree = renderFunc;
   },
   reRenderTree(){
     console.log("WHATSUP");
-  }
+  },
+  dispatch(action) {
+    this.state.profilePage = profileReducer(this.state.profilePage, action);
+    this.state.dialogsPage = dialogsReducer(this.state.dialogsPage, action)
+
+    this.reRenderTree(this.state);
+
+  },
 };
+
+
+
+
 
 export default store;
