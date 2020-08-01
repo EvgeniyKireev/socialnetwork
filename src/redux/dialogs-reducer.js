@@ -9,7 +9,23 @@ export let sendMessageActionCreator = (text) => ({
   text: text,
 });
 
-export let dialogsReducer = (state, action) => {
+let initialState = {
+  dialogUsers: [
+    { id: 1, userName: "Evgeny" },
+    { id: 2, userName: "Liza" },
+    { id: 3, userName: "Olya" },
+    { id: 4, userName: "Sasha" },
+  ],
+  dialogMessages: [
+    { message: "Hello how are you?" },
+    { message: "Whats app" },
+    { message: "Go walk on the street" },
+    { message: "ya poshel spat" },
+  ],
+  newMessageText : '123',
+};
+
+export let dialogsReducer = (state=initialState, action) => {
   switch (action.type) {
     case UPDATE_NEW_TEXT_MES:
       state.newMessageText = action.text;

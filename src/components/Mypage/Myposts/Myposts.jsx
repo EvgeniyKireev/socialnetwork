@@ -7,15 +7,12 @@ import { addPostActionCreator, updateNewTextPostActionCreator } from "../../../r
 const Myposts = (props) => {
   let newPostElement = React.createRef();
   let addPost = () => {
-    let newPost = newPostElement.current.value;
-    props.dispatch(addPostActionCreator());
-    props.dispatch(updateNewTextPostActionCreator(''));
+    props.addPost();
   };
-
-  let componentPosts = props.state.posts.map((el) => <Post text={el.post} />);
+  let componentPosts = props.posts.map((el) => <Post text={el.post} />);
 
   let updateNewPostText = () => {
-    props.dispatch(updateNewTextPostActionCreator(newPostElement.current.value));
+    props.updateNewPostText(newPostElement.current.value);
   };
 
   return (
@@ -24,7 +21,7 @@ const Myposts = (props) => {
         <textarea
           onChange={updateNewPostText}
           ref={newPostElement}
-          value={props.state.newTextPost}
+          value={props.newTextPost}
         ></textarea>
         <button type="button" onClick={addPost}>
           Опубликовать
