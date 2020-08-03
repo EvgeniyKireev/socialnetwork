@@ -19,19 +19,8 @@ class App extends React.Component {
         <Header />
         <Nav />
         <div className="mcontent">
-          <Route
-            path="/profile"
-            render={() => (
-              <Mypage
-                state={this.props.state.profilePage}
-                dispatch={this.props.dispatch}
-              />
-            )}
-          />
-          <Route
-            path="/dialogs"
-            render={() => <DialogsContainer state={this.props.state.dialogsPage} dispatch={this.props.dispatch} />}
-          />
+          <Route path="/profile" render={() => <Mypage />} />
+          <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/news" component={News} />
           <Route path="/settings" component={Settings} />
         </div>

@@ -1,23 +1,30 @@
 import React from "react";
-import s from "./Dialogs.module.css";
-import { NavLink } from "react-router-dom";
-import User from "./User/User";
-import Message from "./Message/Message";
-import { updateNewTextMesActionCreator, sendMessageActionCreator } from "../../redux/dialogs-reducer";
+import {
+  updateNewTextMesActionCreator,
+  sendMessageActionCreator,
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import { connect } from "react-redux";
 
-
-const DialogsContainer = (props) => {
-  let sendMes = () => {
-    props.dispatch(sendMessageActionCreator());
-    props.dispatch(updateNewTextMesActionCreator(''));
+let mapStateToProps = (state) => {
+  return {
+    newMessageText: state.dialogsPage.newMessageText,
+    users: state.dialogsPage.dialogUsers,
+    messages: state.dialogsPage.dialogMessages,
   };
-  let updateMesText = (text) => {
-    props.dispatch(updateNewTextMesActionCreator(text));
-  };
-  return (
-    <Dialogs newMessageText={props.state.newMessageText} sendMes={sendMes} updateMesText={updateMesText} users={props.state.dialogUsers} messages={props.state.dialogMessages}/>
-  );
 };
+let mapDispatchToProps = (dispatch) => {
+  return {
+    sendMes: () => {
+      dispatch(sendMessageActionCreator());
+      dispatch(updateNewTextMesActionCreator(""));
+    },
+    updateMesText: (text) => {
+      dispatch(updateNewTextMesActionCreator(text));
+    },
+  };
+};
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

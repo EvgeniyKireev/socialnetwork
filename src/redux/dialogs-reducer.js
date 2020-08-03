@@ -21,18 +21,24 @@ let initialState = {
     { message: "Go walk on the street" },
     { message: "ya poshel spat" },
   ],
-  newMessageText : '123',
+  newMessageText: "123",
 };
 
-export let dialogsReducer = (state=initialState, action) => {
+export let dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_NEW_TEXT_MES:
-      state.newMessageText = action.text;
-      return state;
-    case SEND_MESSAGE:
+    case UPDATE_NEW_TEXT_MES: {
+      let stateCopy = { ...state };
+
+      stateCopy.newMessageText = action.text;
+      return stateCopy;
+    }
+    case SEND_MESSAGE: {
+      let stateCopy = { ...state };
+      stateCopy.dialogMessages = [...stateCopy.dialogMessages];
       let body = { message: state.newMessageText };
-      state.dialogMessages.push(body);
-      return state;
+      stateCopy.dialogMessages.push(body);
+      return stateCopy;
+    }
     default:
       return state;
   }
