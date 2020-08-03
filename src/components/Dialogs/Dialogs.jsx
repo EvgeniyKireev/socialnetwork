@@ -3,21 +3,20 @@ import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 import User from "./User/User";
 import Message from "./Message/Message";
-import { updateNewTextMesActionCreator, sendMessageActionCreator } from "../../redux/dialogs-reducer";
 
 
 const Dialogs = (props) => {
   let newMesElement = React.createRef();
   let sendMes = () => {
-    props.dispatch(sendMessageActionCreator(newMesElement.current.value));
+   props.sendMes();
   };
-  let UpdateMesText = () => {
-    props.dispatch(updateNewTextMesActionCreator(newMesElement.current.value));
+  let updateMesText = () => {
+    props.updateMesText(newMesElement.current.value);
   };
-  const componentUsers = props.state.dialogUsers.map((el) => (
+  const componentUsers = props.users.map((el) => (
     <User userName={el.userName} id={el.id} />
   ));
-  const componentMessage = props.state.dialogMessages.map((el) => (
+  const componentMessage = props.messages.map((el) => (
     <Message message={el.message} />
   ));
   return (
@@ -26,9 +25,9 @@ const Dialogs = (props) => {
       <div className={s.userMessages}>{componentMessage}</div>
       <div>
         <textarea
-          onChange={UpdateMesText}
+          onChange={updateMesText}
           ref={newMesElement}
-          value={props.state.newMessageText}
+          value={props.newMessageText}
         ></textarea>
         <button onClick={sendMes}>Опубликовать</button>
       </div>

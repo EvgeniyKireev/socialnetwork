@@ -7,6 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class App extends React.Component {
           />
           <Route
             path="/dialogs"
-            render={() => <Dialogs state={this.props.state.dialogsPage} dispatch={this.props.dispatch} />}
+            render={() => <DialogsContainer state={this.props.state.dialogsPage} dispatch={this.props.dispatch} />}
           />
           <Route path="/news" component={News} />
           <Route path="/settings" component={Settings} />

@@ -11,7 +11,7 @@ const Myposts = (props) => {
   };
   let componentPosts = props.posts.map((el) => <Post text={el.post} />);
 
-  let updateNewPostText = () => {
+  let updateNewPostText = (text) => {
     props.updateNewPostText(newPostElement.current.value);
   };
 
