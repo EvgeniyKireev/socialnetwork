@@ -14,10 +14,10 @@ const Dialogs = (props) => {
     props.updateMesText(newMesElement.current.value);
   };
   const componentUsers = props.users.map((el) => (
-    <User userName={el.userName} id={el.id} />
+    <User userName={el.userName} key={el.id} id={el.id} />
   ));
   const componentMessage = props.messages.map((el) => (
-    <Message message={el.message} />
+    <Message id={el.id} key={el.id} message={el.message} />
   ));
   return (
     <div className={s.dialogs}>

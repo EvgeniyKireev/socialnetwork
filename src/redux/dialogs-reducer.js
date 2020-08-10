@@ -16,10 +16,10 @@ let initialState = {
     { id: 4, userName: "Sasha" },
   ],
   dialogMessages: [
-    { message: "Hello how are you?" },
-    { message: "Whats app" },
-    { message: "Go walk on the street" },
-    { message: "ya poshel spat" },
+    { id: 1, message: "Hello how are you?" },
+    { id: 2, message: "Whats app" },
+    { id: 3, message: "Go walk on the street" },
+    { id: 4, message: "ya poshel spat" },
   ],
   newMessageText: "123",
 };
@@ -34,7 +34,7 @@ export let dialogsReducer = (state = initialState, action) => {
         ...state,
         dialogMessages: [
           ...state.dialogMessages,
-          { message: state.newMessageText },
+          { id: 5, message: state.newMessageText },
         ],
       };
     }
