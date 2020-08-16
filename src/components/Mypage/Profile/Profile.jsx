@@ -1,26 +1,34 @@
 import React from "react";
 import s from "./Profile.module.css";
+import preloader from '../../Users/assets/images/preloader.svg';
 
-const Profile = () => {
+const Profile = (props) => {
+  if (!props.profile) {
+    return <img src={preloader} alt=""/>;
+  }
   return (
     <div className={s.profile}>
       <div className={s.me}>
         <div>
           <img
             className={s.avatar}
-            src="https://cdn.worldvectorlogo.com/logos/tiktok-logo-2--1.svg"
+            src={props.profile.photos.large}
             alt="Profile avatar"
           />
         </div>
-        <div className={s.name}>Evgeny Kireev</div>
+        <div className={s.name}>{props.profile.fullName}</div>
       </div>
       <div className={s.description}>
-        <ul>
-          <li>19 лет</li>
-          <li>Россия</li>
-          <li>Москва</li>
-          <li>Финансовый университет</li>
-        </ul>
+        {props.profile.aboutMe}
+      </div>
+      <div><h3>Контакты:</h3>
+      <ul>
+        <li>{props.profile.contacts.vk}</li>
+        <li>{props.profile.contacts.facebook}</li>
+        <li>{props.profile.contacts.twitter}</li>
+        <li>{props.profile.contacts.instagram}</li>
+        <li>{props.profile.contacts.github}</li>
+      </ul>
       </div>
     </div>
   );
