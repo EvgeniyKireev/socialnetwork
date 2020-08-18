@@ -9,6 +9,7 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import MypageContainer from "./components/Mypage/MypageContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Header />
+        <HeaderContainer />
         <Nav />
         <div className="mcontent">
           <Route path="/profile/:userId?" render={() => <MypageContainer />} />

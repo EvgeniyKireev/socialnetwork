@@ -16,9 +16,7 @@ class MypageContainer extends React.Component {
       headers: { "API-KEY": "f82df6c3-33b7-4f9c-aecf-8cc3197eb73e" },
     })
     .then((response) => {
-      debugger
       this.props.setUserProfile(response.data);
-      debugger
     });
   }
   render() {
