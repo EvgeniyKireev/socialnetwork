@@ -6,17 +6,15 @@ import * as axios from "axios";
 import { setUserProfile } from '../../redux/profile-reducer';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { userApi } from "../../api/api";
 
 class MypageContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
     if (!userId) userId = 10864;
-    axios
-    .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {
-      headers: { "API-KEY": "f82df6c3-33b7-4f9c-aecf-8cc3197eb73e" },
-    })
-    .then((response) => {
-      this.props.setUserProfile(response.data);
+    userApi.getMypage(userId)
+    .then((data) => {
+      this.props.setUserProfile(data);
     });
   }
   render() {
