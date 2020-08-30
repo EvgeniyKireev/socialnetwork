@@ -7,6 +7,8 @@ import {
   getUsersThunkCreator2,
 } from "../../redux/users-reducer";
 import Users from "./Users";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/authRedirect";
 class UsersAPI extends React.Component {
   componentDidMount() {
    this.props.getUsers1()
@@ -42,11 +44,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-const UsersContainer = connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
   follow,
   unfollow,
   getUsers1: getUsersThunkCreator1,
   getUsers2: getUsersThunkCreator2
-})(UsersAPI);
-
-export default UsersContainer;
+}), withAuthRedirect)(UsersAPI);

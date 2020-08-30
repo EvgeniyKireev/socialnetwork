@@ -1,10 +1,8 @@
 import React from "react";
 import s from "./Dialogs.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import User from "./User/User";
 import Message from "./Message/Message";
-
-
 const Dialogs = (props) => {
   let newMesElement = React.createRef();
   let sendMes = () => {
@@ -19,6 +17,7 @@ const Dialogs = (props) => {
   const componentMessage = props.messages.map((el) => (
     <Message id={el.id} key={el.id} message={el.message} />
   ));
+
   return (
     <div className={s.dialogs}>
       <div className={s.users}>{componentUsers}</div>
