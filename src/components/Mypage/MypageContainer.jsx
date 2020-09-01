@@ -19,7 +19,7 @@ class MypageContainer extends React.Component {
     return (
       <div>
         <Profile {...this.props} />
-        <ProfileStatus />
+        <ProfileStatus  status={'whasup'}/>
         <MyPostsContainer />
       </div>
     );
