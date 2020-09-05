@@ -9,7 +9,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import MypageContainer from "./components/Mypage/MypageContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from './components/Login/login';
+import Login from "./components/Login/login";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,8 +25,8 @@ class App extends React.Component {
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/news" component={News} />
           <Route path="/settings" component={Settings} />
-          <Route path='/users' render={() => <UsersContainer />} />
-          <Route path='/login' render={() => <Login />} />
+          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/login" render={() => <Login />} />
         </div>
       </div>
     );
