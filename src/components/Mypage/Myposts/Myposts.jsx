@@ -5,32 +5,31 @@ import {
   addPostActionCreator,
   updateNewTextPostActionCreator,
 } from "../../../redux/profile-reducer";
+import {Field, reduxForm} from "redux-form";
+
+const PostForm = (props) => {
+  return (<form onSubmit={props.handleSubmit}>
+        <Field component='input' name='post'/>
+    <button>
+      Опубликовать
+    </button>
+  </form>);
+}
+
+const PostReduxForm = reduxForm({form: 'post'})(PostForm);
 
 const Myposts = (props) => {
-  let newPostElement = React.createRef();
-  let addPost = () => {
-    props.addPost();
+  let addPost = (values) => {
+    props.addPost(values.post);
   };
   let componentPosts = props.posts.map((el) => (
     <Post key={el.id} text={el.post} />
   ));
 
-  let updateNewPostText = (text) => {
-    props.updateNewPostText(newPostElement.current.value);
-  };
 
   return (
     <div>
-      <form>
-        <textarea
-          onChange={updateNewPostText}
-          ref={newPostElement}
-          value={props.newTextPost}
-        ></textarea>
-        <button type="button" onClick={addPost}>
-          Опубликовать
-        </button>
-      </form>
+      <PostReduxForm onSubmit={addPost}/>
       {componentPosts}
     </div>
   );

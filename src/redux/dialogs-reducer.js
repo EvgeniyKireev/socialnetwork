@@ -1,11 +1,8 @@
 const UPDATE_NEW_TEXT_MES = "UPDATE_NEW_TEXT_MES";
 const SEND_MESSAGE = "SEND-MESSAGE";
-export let sendMessageActionCreator = () => ({
+export let sendMessageActionCreator = (newMessageText) => ({
   type: SEND_MESSAGE,
-});
-export let updateNewTextMesActionCreator = (text) => ({
-  type: UPDATE_NEW_TEXT_MES,
-  text: text,
+  newMessageText
 });
 
 let initialState = {
@@ -21,20 +18,16 @@ let initialState = {
     { id: 3, message: "Go walk on the street" },
     { id: 4, message: "ya poshel spat" },
   ],
-  newMessageText: "123",
 };
 
 export let dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_NEW_TEXT_MES: {
-      return { ...state, newMessageText: action.text };
-    }
     case SEND_MESSAGE: {
       return {
         ...state,
         dialogMessages: [
           ...state.dialogMessages,
-          { id: 5, message: state.newMessageText },
+          { id: 5, message: action.newMessageText },
         ],
       };
     }

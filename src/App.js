@@ -12,7 +12,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/login";
 
 class App extends React.Component {
-  constructor(props) {
+  constructor(props) {      
     super(props);
   }
   render() {
