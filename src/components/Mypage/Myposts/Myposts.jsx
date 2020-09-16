@@ -6,10 +6,13 @@ import {
   updateNewTextPostActionCreator,
 } from "../../../redux/profile-reducer";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormContols";
+import {maxLengthCreator, required} from "../../common/validators";
 
+const maxLength = maxLengthCreator(30);
 const PostForm = (props) => {
   return (<form onSubmit={props.handleSubmit}>
-        <Field component='input' name='post'/>
+        <Field component={Textarea} name='post' validate={[required, maxLength]}/>
     <button>
       Опубликовать
     </button>
