@@ -1,10 +1,6 @@
 import React from "react";
 import s from "./Myposts.module.css";
 import Post from "./Post/Post";
-import {
-  addPostActionCreator,
-  updateNewTextPostActionCreator,
-} from "../../../redux/profile-reducer";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormContols";
 import {maxLengthCreator, required} from "../../common/validators";
