@@ -1,4 +1,5 @@
 import { userApi } from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET_USER_DATA";
 let initialState = {
@@ -25,15 +26,18 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     if (data.resultCode === 0) {
       dispatch(authMe());
     }
+    else {
+      dispatch(stopSubmit("login", {_error: data.messages[0]}))
+    }
   })
 }
 
 export const logout = () => (dispatch) => {
-  debugger
   return userApi.logout().then((data) => {
     if (data.resultCode === 0) {
       dispatch(setAuthUserData(null, null, null, false));
     }
+
   })
 }
 

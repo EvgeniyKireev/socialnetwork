@@ -12,7 +12,7 @@ import ProfileStatus from "./Profile/ProfileStatus";
 class MypageContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
-    if (!userId) userId = 10864;
+    if (!userId) userId = this.props.authUserId;
     this.props.getProfileInfo(userId)
     this.props.getStatus(userId);
   }
@@ -30,7 +30,8 @@ class MypageContainer extends React.Component {
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   auth: state.auth.isAuth,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  authUserId: state.auth.id,
 });
 
 export default compose(connect(mapStateToProps, { getProfileInfo, getStatus, updateStatus }), withRouter, withAuthRedirect)(MypageContainer);

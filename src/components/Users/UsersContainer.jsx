@@ -49,4 +49,4 @@ export default compose(connect(mapStateToProps, {
   unfollow,
   getUsers1: getUsersThunkCreator1,
   getUsers2: getUsersThunkCreator2
-}), withAuthRedirect)(UsersAPI);
+}))(UsersAPI);

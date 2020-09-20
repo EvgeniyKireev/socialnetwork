@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -10,12 +10,24 @@ import UsersContainer from "./components/Users/UsersContainer";
 import MypageContainer from "./components/Mypage/MypageContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/login";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {initializeAppThunk} from "./redux/initialize-reducer";
+import preloader from "./components/Users/assets/images/preloader.svg";
+
 
 class App extends React.Component {
-  constructor(props) {      
+  constructor(props) {
     super(props);
   }
-  render() {
+  componentDidMount() {
+      this.props.initializeAppThunk();
+  }
+
+    render() {
+      if (!this.props.isInitialized){
+         return <img src={preloader} alt=""/>;
+      }
     return (
       <div className="wrapper">
         <HeaderContainer />
@@ -33,4 +45,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+let mapStateToProps = (state) => ({
+    isInitialized: state.init.isInitialized,
+})
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {initializeAppThunk}))(App);
