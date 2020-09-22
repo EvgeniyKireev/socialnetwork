@@ -14,7 +14,7 @@ class MypageContainer extends React.Component {
     let userId = this.props.match.params.userId;
     if (!userId) userId = this.props.authUserId;
     this.props.getProfileInfo(userId)
-    this.props.getStatus(userId);
+    this.props.getStatus(userId);   
   }
   render() {
     return (

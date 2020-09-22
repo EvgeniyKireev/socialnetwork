@@ -9,6 +9,14 @@ import {
 import Users from "./Users";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/authRedirect";
+import {
+  getAllUsers,
+  getCurrentPage,
+  getFollowingInProgress,
+  getIsLoading,
+  getPageSize,
+  getTotalUsersCount
+} from "../../redux/users-selectors";
 class UsersAPI extends React.Component {
   componentDidMount() {
    this.props.getUsers1()
@@ -35,12 +43,12 @@ class UsersAPI extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    followingInProgress: state.usersPage.followingInProgress
+    users: getAllUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isLoading: getIsLoading(state),
+    followingInProgress: getFollowingInProgress(state)
   };
 };
 
@@ -48,5 +56,5 @@ export default compose(connect(mapStateToProps, {
   follow,
   unfollow,
   getUsers1: getUsersThunkCreator1,
-  getUsers2: getUsersThunkCreator2
+  getUsers2: getUsersThunkCreator2,
 }))(UsersAPI);
