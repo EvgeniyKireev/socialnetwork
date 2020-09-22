@@ -7,20 +7,20 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/authRedirect";
 import { compose } from "redux";
-import ProfileStatus from "./Profile/ProfileStatus";
+import ProfileStatusWithHooks from "./Profile/ProfileStatusWithHooks";
 
 class MypageContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
     if (!userId) userId = this.props.authUserId;
     this.props.getProfileInfo(userId)
-    this.props.getStatus(userId);   
+    this.props.getStatus(userId);
   }
   render() {
     return (
       <div>
         <Profile {...this.props} />
-        <ProfileStatus  status={this.props.status} updateStatus={this.props.updateStatus}/>
+        <ProfileStatusWithHooks  status={this.props.status} updateStatus={this.props.updateStatus}/>
         <MyPostsContainer />
       </div>
     );
