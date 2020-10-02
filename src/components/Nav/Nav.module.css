@@ -1,7 +1,7 @@
 .nav {
     grid-area: nav;
-    background-color: blueviolet;
     margin-top: 25px;
+    margin-left: 100px;
     text-align: center;
   }
   .item a{

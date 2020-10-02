@@ -13,23 +13,21 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
   type: SET_USER_DATA,
   data: { id, email, login , isAuth},
 });
-export const authMe = () => (dispatch) => {
-  return userApi.getUserData().then((data) => {
+export const authMe = () => async (dispatch) => {
+  let data = await userApi.getUserData()
     if (data.resultCode === 0) {
       let { id, login, email } = data.data;
-      dispatch(setAuthUserData(id, login, email, true));
+      dispatch(setAuthUserData(id, email, login, true));
     }
-  });
 };
-export const login = (email, password, rememberMe) => (dispatch) => {
-  return userApi.login(email, password, rememberMe).then((data) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
+  let data = await userApi.login(email, password, rememberMe)
     if (data.resultCode === 0) {
       dispatch(authMe());
     }
     else {
       dispatch(stopSubmit("login", {_error: data.messages[0]}))
     }
-  })
 }
 
 export const logout = () => (dispatch) => {

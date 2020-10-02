@@ -1,8 +1,9 @@
-
-.wrapper {
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+.wrapper {font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
   display: grid;
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 1fr 11fr;
+  grid-template-rows: 45px 1fr;
+  grid-template-columns: 2fr 10fr;
   grid-template-areas: 
   "header header"
   "nav mcontent";
@@ -13,9 +14,14 @@
  }
  .mcontent {
   margin-top: 25px;
-  margin-left: 100px;
+  margin-left: 0px;
+     margin-right: 100px;
   grid-area: mcontent;
 }
+ .navbar {
+     margin-left: 100px;
+     padding-left: 100px;
+ }
 
 
 

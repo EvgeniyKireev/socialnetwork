@@ -8,16 +8,19 @@ import {maxLengthCreator, required} from "../../common/validators";
 const maxLength = maxLengthCreator(30);
 const PostForm = (props) => {
   return (<form onSubmit={props.handleSubmit}>
-        <Field component={Textarea} name='post' validate={[required, maxLength]}/>
-    <button>
-      Опубликовать
-    </button>
+        <div className={s.addNewPosts}>
+          <Field component={Textarea} name='post' validate={[required, maxLength]}/>
+          <button className={s.myButton}>
+            Опубликовать
+          </button>
+        </div>
   </form>);
 }
 
 const PostReduxForm = reduxForm({form: 'post'})(PostForm);
 
 const Myposts = (props) => {
+  console.log("render YO");
   let addPost = (values) => {
     props.addPost(values.post);
   };
@@ -25,9 +28,8 @@ const Myposts = (props) => {
     <Post key={el.id} text={el.post} />
   ));
 
-
   return (
-    <div>
+    <div className={s.posts}>
       <PostReduxForm onSubmit={addPost}/>
       {componentPosts}
     </div>
