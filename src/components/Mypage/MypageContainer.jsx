@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Mypage.module.css";
 import Profile from "./Profile/Profile";
 import MyPostsContainer from "./Myposts/MyPostsContainer";
-import { getProfileInfo, getStatus, updateStatus } from "../../redux/profile-reducer";
+import {getProfileInfo, getStatus, updatePhoto, updateStatus} from "../../redux/profile-reducer";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/authRedirect";
@@ -16,6 +16,17 @@ class MypageContainer extends React.Component {
     this.props.getProfileInfo(userId)
     this.props.getStatus(userId);
   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(this.props.match.params.userId!= prevProps.match.params.userId){
+      let userId = this.props.match.params.userId;
+      if (!userId) userId = this.props.authUserId;
+      this.props.getProfileInfo(userId)
+      this.props.getStatus(userId);
+    }
+
+
+  }
+
   render() {
     return (
       <div>
@@ -34,7 +45,7 @@ let mapStateToProps = (state) => ({
   authUserId: state.auth.id,
 });
 
-export default compose(connect(mapStateToProps, { getProfileInfo, getStatus, updateStatus }), withRouter, withAuthRedirect)(MypageContainer);
+export default compose(connect(mapStateToProps, { getProfileInfo, getStatus, updateStatus, updatePhoto}), withRouter, withAuthRedirect)(MypageContainer);
 
 
 

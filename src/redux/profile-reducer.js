@@ -3,9 +3,10 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_STATUS = "UPDATE_STATUS";
-
+const SET_PHOTO_SUCCESS = "SET_PHOTO_SUCCESS";
 export let addPost = (newTextPost) => ({ type: ADD_POST, newTextPost});
 export let setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+let setPhotoSuccess = (photo) => ({type: SET_PHOTO_SUCCESS, photo});
 export const getProfileInfo = (userId) => async (dispatch) => {
   let response = await userApi.getMypage(userId);
   dispatch(setUserProfile(response))
@@ -21,6 +22,13 @@ export const updateStatus = (status) => (dispatch) => {
   return userApi.updateUserStatus(status).then((data) => {
     if (data.resultCode === 0) {
       dispatch(updateUStatus(status));
+    }
+  })
+}
+export const updatePhoto = (photo) => (dispatch) => {
+  return userApi.uploadPhoto(photo).then((data) => {
+    if (data.resultCode === 0) {
+      dispatch(setPhotoSuccess(data.data.photos));
     }
   })
 }
@@ -52,6 +60,8 @@ export let profileReducer = (state = initialState, action) => {
     case UPDATE_STATUS: {
       return {...state, status: action.status}
     }
+    case SET_PHOTO_SUCCESS:
+      return {...state, profile: {...state.profile, photos: action.photo}}
     default:
       return state;
   }

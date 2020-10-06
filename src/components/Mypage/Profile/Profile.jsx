@@ -1,10 +1,16 @@
 import React from "react";
 import s from "./Profile.module.css";
 import preloader from '../../Users/assets/images/preloader.svg';
+import profilePhoto from "../../Users/assets/images/photo.png";
 
 const Profile = (props) => {
     if (!props.profile) {
         return <img src={preloader} alt=""/>;
+    }
+    let setPhoto = (e) => {
+        if(e.target.files.length) {
+            props.updatePhoto(e.target.files[0]);
+        }
     }
     return (
         <div className={s.profile}>
@@ -12,7 +18,7 @@ const Profile = (props) => {
                 <div>
                     <img
                         className={s.avatar}
-                        src={props.profile.photos.large}
+                        src={props.profile.photos.large || profilePhoto}
                         alt="Profile avatar"
                     />
                 </div>
@@ -30,6 +36,7 @@ const Profile = (props) => {
                             <li>{props.profile.contacts.github}</li>
                         </ul>
                     </div>
+                    <input type={"file"} onChange={setPhoto}/>
                 </div>
             </div>
         </div>

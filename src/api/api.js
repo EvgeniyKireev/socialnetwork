@@ -57,6 +57,13 @@ export const userApi = {
         return instance.delete('auth/login').then((response) => {
             return response.data
         })
-    }
+    },
+    uploadPhoto(photo) {
+        let formData = new FormData();
+        formData.append("image", photo);
+        return instance.put('profile/photo', formData).then((response) => {
+            return response.data
+        });
+    },
 };
 
