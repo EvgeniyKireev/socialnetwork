@@ -1,0 +1,1 @@
+{"version":3,"sources":["Dialogs.module.css","User.module.css"],"names":[],"mappings":"AAAA,wBACI,YAAa,CACb,8BACJ,CCHA,oBACI,UAAY,CACZ,oBACJ","file":"3.ba50e4e8.chunk.css","sourcesContent":[".dialogs {\r\n    display: grid;\r\n    grid-template-columns: 2fr 10fr;\r\n}\r\n",".user a{\r\n    color: black;\r\n    text-decoration: none;\r\n}"]}
