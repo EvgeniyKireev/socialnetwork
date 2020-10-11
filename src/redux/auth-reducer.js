@@ -2,11 +2,13 @@ import { userApi } from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET_USER_DATA";
+const SET_CAPTCHA = 'SET_CAPTCHA';
 let initialState = {
   id: null,
   email: null,
   login: null,
   isAuth: false,
+  captcha: null,
 };
 
 export const setAuthUserData = (id, email, login, isAuth) => ({
@@ -20,12 +22,15 @@ export const authMe = () => async (dispatch) => {
       dispatch(setAuthUserData(id, email, login, true));
     }
 };
-export const login = (email, password, rememberMe) => async (dispatch) => {
-  let data = await userApi.login(email, password, rememberMe)
+export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+  let data = await userApi.login(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
       dispatch(authMe());
     }
     else {
+      if (data.resultCode === 10) {
+        dispatch(getCaptcha());
+      }
       dispatch(stopSubmit("login", {_error: data.messages[0]}))
     }
 }
@@ -39,6 +44,12 @@ export const logout = () => (dispatch) => {
   })
 }
 
+const setCaptcha = (url) => ({type: SET_CAPTCHA, url});
+export const getCaptcha = () => async (dispatch) => {
+  let response = await userApi.getCaptcha();
+  dispatch(setCaptcha(response.url));
+}
+
 export let authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_DATA: {
@@ -47,6 +58,10 @@ export let authReducer = (state = initialState, action) => {
         ...action.data,
       };
     }
+    case SET_CAPTCHA:
+      return {
+        ...state, captcha: action.url
+      }
 
     default:
       return state;

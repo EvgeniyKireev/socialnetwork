@@ -5,6 +5,7 @@ import preloader from "./assets/images/preloader.svg";
 import { NavLink } from "react-router-dom";
 import * as axios from "axios";
 import { userApi } from "../../api/api";
+import Paginator from "../common/Paginator/Paginator";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -19,18 +20,20 @@ const Users = (props) => {
           <img src={preloader} alt="" />
         </div>
       ) : null}
-      {btnPages.map((p) => {
-        return (
-          <button
-            className={props.currentPage === p && s.currentPage}
-            onClick={() => {
-              props.onPageChanged(p);
-            }}
-          >
-            {p}
-          </button>
-        );
-      })}
+        <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
+                   totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}/>
+      {/*{btnPages.map((p) => {*/}
+      {/*  return (*/}
+      {/*    <button*/}
+      {/*      className={props.currentPage === p && s.currentPage}*/}
+      {/*      onClick={() => {*/}
+      {/*        props.onPageChanged(p);*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      {p}*/}
+      {/*    </button>*/}
+      {/*  );*/}
+      {/*})}*/}
       {props.users.map((u) => (
         <div key={u.id}>
           <div>
@@ -43,10 +46,6 @@ const Users = (props) => {
           </div>
           <div>
             <h3>{u.name}</h3>
-          </div>
-          <div>
-            {"u.location.city"}
-            {"u.location.country"}
           </div>
           <div>
             {u.followed ? (

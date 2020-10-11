@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import preloader from "../../Users/assets/images/preloader.svg";
 
 const ProfileStatusWithHooks = (props) => {
   let [editMode, setEditMode] = useState(false);
@@ -15,19 +16,22 @@ const ProfileStatusWithHooks = (props) => {
   useEffect(() => {
     editStatus(props.status)
   }, [props.status])
+  if (!props.profile) {
+    return <div>loading...</div>;
+  }
   return (
       <div>
-        {!editMode && (
-          <div onDoubleClick={activateEditMode}>
-            <span>{props.status || "--------- "}</span>
-          </div>
+        {props.id === props.profile.userId ? (<div>{!editMode && (
+            <div onDoubleClick={activateEditMode}>
+              <span>{props.status || "--------- "}</span>
+            </div>
         )}
-        {editMode && (
-          <div>
-            <input autoFocus={true} onChange={onChangeStatus} onBlur={deactivateEditMode} value={status}
-            />
-          </div>
-        )}
+          {editMode && (
+              <div>
+                <input autoFocus={true} onChange={onChangeStatus} onBlur={deactivateEditMode} value={status}
+                />
+              </div>
+          )}</div>) : <span>{props.status || "--------- "}</span>}
       </div>
     );
 }

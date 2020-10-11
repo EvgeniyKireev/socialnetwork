@@ -12,7 +12,9 @@ const LoginForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div><Field component={Input} name={'email'} placeholder={"login"} validate={[required, maxLength]}/></div>
             <div><Field component={Input} name={'password'} type={'password'} placeholder={"password"} validate={[required, maxLength]}/></div>
-            <div><Field component={"input"} name={'rememberMe'} type={"checkbox"}/></div>
+            <div>remember me:<Field component={"input"} name={'rememberMe'} type={"checkbox"}/></div>
+            {props.captcha && <div><div>Captcha:</div><div><img src={props.captcha}/></div>
+                <div><Field component={Input} name={'captcha'} placeholder={"enter the characters"}/></div></div>}
             <button>Login</button>
             <div>{props.error}</div>
         </form>
@@ -25,7 +27,7 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     const onSubmit = (FormData) => {
-        props.login(FormData.email, FormData.password, true);
+        props.login(FormData.email, FormData.password, true, FormData.captcha);
     }
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>;
@@ -33,13 +35,14 @@ const Login = (props) => {
     return (
         <div>
             LOGIN
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm captcha={props.captcha} onSubmit={onSubmit}/>
         </div>
     );
 };
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha,
 })
 
 export default connect(mapStateToProps, {login})(Login);

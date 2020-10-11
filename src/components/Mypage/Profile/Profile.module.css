@@ -7,6 +7,11 @@
   font-size: 20px;
 }
 .avatar {
+  display: flex;
+  flex-direction: column;
+}
+.avatar img{
+  margin-bottom: 10px;
   width: 200px;
   height: 200px;
 }

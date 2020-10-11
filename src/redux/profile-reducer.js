@@ -32,6 +32,12 @@ export const updatePhoto = (photo) => (dispatch) => {
     }
   })
 }
+// TODO: не работает onSubmit
+export const uploadMyProfile = (profile) => async (dispatch, getState) => {
+  let response = await userApi.updateProfile(profile)
+  const userId = getState().auth.id
+  dispatch(getProfileInfo(userId));
+}
 
 let initialState = {
   posts: [
