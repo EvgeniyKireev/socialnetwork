@@ -20,7 +20,6 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({form: 'post'})(PostForm);
 
 const Myposts = (props) => {
-  console.log("render YO");
   let addPost = (values) => {
     props.addPost(values.post);
   };

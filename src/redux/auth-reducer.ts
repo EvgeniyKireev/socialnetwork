@@ -4,25 +4,28 @@ import {stopSubmit} from "redux-form";
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_CAPTCHA = 'SET_CAPTCHA';
 let initialState = {
-  id: null,
-  email: null,
-  login: null,
-  isAuth: false,
-  captcha: null,
+  id: null as null | number,
+  email: null as string | null,
+  login: null as string | null,
+  isAuth: false as boolean,
+  captcha: null as string | null,
 };
 
-export const setAuthUserData = (id, email, login, isAuth) => ({
+export type initialStateType = typeof initialState;
+
+export const setAuthUserData = (id: number|null, email: string|null, login : string|null, isAuth: boolean) => ({
   type: SET_USER_DATA,
   data: { id, email, login , isAuth},
 });
-export const authMe = () => async (dispatch) => {
+
+export const authMe = () => async (dispatch:any) => {
   let data = await userApi.getUserData()
     if (data.resultCode === 0) {
       let { id, login, email } = data.data;
       dispatch(setAuthUserData(id, email, login, true));
     }
 };
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+export const login = (email:string, password:string, rememberMe:boolean, captcha:string) => async (dispatch:any) => {
   let data = await userApi.login(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
       dispatch(authMe());
@@ -35,8 +38,8 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
     }
 }
 
-export const logout = () => (dispatch) => {
-  return userApi.logout().then((data) => {
+export const logout = () => (dispatch:any) => {
+  return userApi.logout().then((data:any) => {
     if (data.resultCode === 0) {
       dispatch(setAuthUserData(null, null, null, false));
     }
@@ -44,13 +47,13 @@ export const logout = () => (dispatch) => {
   })
 }
 
-const setCaptcha = (url) => ({type: SET_CAPTCHA, url});
-export const getCaptcha = () => async (dispatch) => {
+const setCaptcha = (url:string) => ({type: SET_CAPTCHA, url});
+export const getCaptcha = () => async (dispatch:any) => {
   let response = await userApi.getCaptcha();
   dispatch(setCaptcha(response.url));
 }
 
-export let authReducer = (state = initialState, action) => {
+export let authReducer = (state = initialState, action:any) :initialStateType => {
   switch (action.type) {
     case SET_USER_DATA: {
       return {

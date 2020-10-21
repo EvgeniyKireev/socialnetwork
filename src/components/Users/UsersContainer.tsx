@@ -17,11 +17,29 @@ import {
   getPageSize,
   getTotalUsersCount
 } from "../../redux/users-selectors";
-class UsersAPI extends React.Component {
+import { AppRootStateType } from "../../redux/redux-store";
+type OwnPropsType = {
+  pageNumber: number
+}
+type MapStatePropsType = {
+  users: any
+  pageSize: number
+  totalUsersCount: number
+  currentPage:number
+  isLoading: boolean
+  followingInProgress: Array<number>
+}
+type MapDispatchPropsType = {
+  getUsers1: () => void
+  getUsers2: (pageNumber:number,pageSize:number) => void
+  follow: (id:number) => void
+  unfollow: (id:number) => void
+}
+class UsersAPI extends React.Component<OwnPropsType&MapDispatchPropsType&MapStatePropsType> {
   componentDidMount() {
    this.props.getUsers1()
   }
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber:number) => {
     this.props.getUsers2(pageNumber, this.props.pageSize)
   };
   render() {
@@ -41,7 +59,7 @@ class UsersAPI extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:AppRootStateType):MapStatePropsType => {
   return {
     users: getAllUsers(state),
     pageSize: getPageSize(state),
@@ -52,7 +70,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(connect(mapStateToProps, {
+export default compose(connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppRootStateType>(mapStateToProps, {
   follow,
   unfollow,
   getUsers1: getUsersThunkCreator1,

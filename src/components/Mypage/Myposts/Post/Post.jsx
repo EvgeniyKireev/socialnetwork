@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Post.module.css';
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 const Post = (props) => {
     return(
@@ -10,4 +11,5 @@ const Post = (props) => {
         </div>
     );
 }
+
 export default Post;
